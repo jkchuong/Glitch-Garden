@@ -6,23 +6,51 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     [SerializeField] GameObject projectile, gun;
+    private AttackerSpawner myLaneSpawner;
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        SetLaneSpawner();
+    }
 
     private void Update()
     {
         if (IsAttackerInLane())
         {
-            Debug.Log("Shoot pew pew");
-            // Change animation states
+            animator.SetBool("IsAttacking", true);
         }
         else
         {
-            Debug.Log("Sit and wait");
+            animator.SetBool("IsAttacking", false);
+        }
+    }
+
+    private void SetLaneSpawner()
+    {
+        AttackerSpawner[] spawners = FindObjectsOfType<AttackerSpawner>();
+
+        foreach (AttackerSpawner spawner in spawners)
+        {
+            bool IsCloseEnough = Mathf.Approximately(transform.position.y, Mathf.Ceil(spawner.transform.position.y));
+            if (IsCloseEnough)
+            {
+                myLaneSpawner = spawner;
+            }
         }
     }
 
     private bool IsAttackerInLane()
     {
-        throw new NotImplementedException();
+        if (myLaneSpawner.transform.childCount <= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public void Fire()
