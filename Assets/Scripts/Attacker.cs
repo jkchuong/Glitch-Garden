@@ -7,8 +7,7 @@ public class Attacker : MonoBehaviour
 {
     [Range (0f, 5f)]
     float currentSpeed = 1f;
-    [SerializeField] int health = 5;
-    [SerializeField] GameObject deathVFX;
+    GameObject currentTarget;
 
     void Start()
     {
@@ -18,6 +17,15 @@ public class Attacker : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.left * Time.deltaTime * currentSpeed);
+        UpdateAnimationState();
+    }
+
+    private void UpdateAnimationState()
+    {
+        if (!currentTarget)
+        {
+            GetComponent<Animator>().SetBool("IsAttacking", false);
+        }
     }
 
     public void SetMovementSpeed(float speed)
@@ -25,24 +33,21 @@ public class Attacker : MonoBehaviour
         currentSpeed = speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Attack(GameObject target)
     {
-        if (collision.CompareTag("Projectile"))
+        GetComponent<Animator>().SetBool("IsAttacking", true);
+        currentTarget = target;
+    }
+
+    public void StrikeCurrentTarget(int damage)
+    {
+        if (!currentTarget) { return; }
+        Health health = currentTarget.GetComponent<Health>();
+        if (health)
         {
-            Projectile projectile = collision.GetComponent<Projectile>();
-            health -= projectile.DoDamage();
-            if (health <= 0)
-            {
-                TriggerDeathVFX();
-                Destroy(gameObject);
-            }
+            health.DealDamage(damage);
         }
     }
 
-    private void TriggerDeathVFX()
-    {
-        if (!deathVFX) { return; }
-        GameObject deathVFXObject = Instantiate(deathVFX, transform.position - (transform.right * 0.4f) + (transform.up * 0.5f), transform.rotation);
-        Destroy(deathVFXObject, 1f);
-    }
+
 }

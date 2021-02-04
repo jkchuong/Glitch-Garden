@@ -16,13 +16,16 @@ public class LevelLoader : MonoBehaviour
         {
             StartCoroutine(WaitForTime());
         }
-
-
     }
 
     private IEnumerator WaitForTime()
     {
         yield return new WaitForSeconds(timeToWait);
         SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    public void LoadLoseScreen()
+    {
+        SceneManager.LoadScene("Lose Screen");
     }
 }

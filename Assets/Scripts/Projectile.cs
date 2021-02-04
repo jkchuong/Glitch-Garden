@@ -7,11 +7,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] float projectileSpeed = 1f;
     [SerializeField] int damage = 1;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -20,10 +15,16 @@ public class Projectile : MonoBehaviour
         transform.Rotate(0f, 0f, -1f);
     }
 
-    public int DoDamage()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
-        return damage;
+        var health = collision.GetComponent<Health>();
+        var attacker = collision.GetComponent<Attacker>();
+
+        if (health && attacker)
+        {
+            health.DealDamage(damage);
+            Destroy(gameObject);
+        }
     }
 
 }

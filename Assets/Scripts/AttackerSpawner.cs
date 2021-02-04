@@ -8,7 +8,7 @@ public class AttackerSpawner : MonoBehaviour
 
     [SerializeField] float minTimeBetweenSpawn = 1f;
     [SerializeField] float maxTimeBetweenSpawn = 5f;
-    [SerializeField] Attacker attackerPrefab;
+    [SerializeField] Attacker[] attackerPrefab;
 
     bool spawn = true;
 
@@ -24,7 +24,8 @@ public class AttackerSpawner : MonoBehaviour
 
     private void SpawnAttacker()
     {
-        Attacker newAttacker = Instantiate(attackerPrefab, transform.position, transform.rotation) as Attacker;
+        int num = UnityEngine.Random.Range(0, attackerPrefab.Length);
+        Attacker newAttacker = Instantiate(attackerPrefab[num], transform.position, transform.rotation) as Attacker;
         newAttacker.transform.parent = transform;
     }
 
