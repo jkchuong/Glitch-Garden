@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.36
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1057,6 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27a9333e491f194ab3aac48510f0df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTime: 10
 --- !u!1 &5686096967573517569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,7 +1129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5.9, y: 16.3}
+  m_AnchoredPosition: {x: 5.9000053, y: 16.3}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5067422486122826975

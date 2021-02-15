@@ -11,8 +11,9 @@ public class LoseCollider : MonoBehaviour
         healthDisplay = FindObjectOfType<HealthDisplay>();
     }
 
-    private void OnTriggerEnter2D()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         healthDisplay.RemoveHealth(1);
+        Destroy(collider.gameObject);
     }
 }

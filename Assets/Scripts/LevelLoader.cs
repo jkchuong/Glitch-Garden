@@ -21,11 +21,38 @@ public class LevelLoader : MonoBehaviour
     private IEnumerator WaitForTime()
     {
         yield return new WaitForSeconds(timeToWait);
+        LoadNextScene();
+    }
+
+    public void LoadNextScene()
+    {
         SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    public void RestartScene()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Start Scene");
+    }
+
+    public void LoadOptions()
+    {
+        SceneManager.LoadScene("Options Scene");
     }
 
     public void LoadLoseScreen()
     {
         SceneManager.LoadScene("Lose Screen");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
