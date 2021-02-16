@@ -67,7 +67,7 @@ public class Shooter : MonoBehaviour
 
     public void Fire()
     {
-        GameObject newProjectile = Instantiate(projectile, gun.transform.position, Quaternion.Euler(0, 0, 45));
+        GameObject newProjectile = Instantiate(projectile, gun.transform.position, Quaternion.Euler(0, 0, 45)) as GameObject;
         newProjectile.transform.parent = projectileParent.transform;
     }
 }
